@@ -6,7 +6,7 @@ use Logger\LogLevel;
 
 class FakeHandler extends AbstractHandler
 {
-    function log(LogLevel $logLevel, string $message)
+    function write(LogLevel $logLevel, string $message)
     {
         // Fake method
     }

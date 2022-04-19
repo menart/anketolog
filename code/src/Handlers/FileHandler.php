@@ -17,11 +17,8 @@ class FileHandler extends AbstractHandler
         $this->fileName = $params['filename'];
     }
 
-    function log(LogLevel $logLevel, string $message)
+    function write(LogLevel $logLevel, string $message)
     {
-        if ($this->isIsEnabled() and in_array($logLevel, $this->getLevels())) {
-            $logMessage = $this->formatter->formatted(new \DateTime(), $logLevel, $message);
-            file_put_contents($this->fileName, $logMessage, FILE_APPEND);
-        }
+        file_put_contents($this->fileName, $message, FILE_APPEND);
     }
 }

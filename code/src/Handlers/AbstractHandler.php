@@ -11,7 +11,7 @@ abstract class AbstractHandler extends AbstractLogger
 {
     protected bool $is_enabled;
     protected array $levels;
-    protected ?LineFormatter $formatter;
+    protected LineFormatter $formatter;
 
     /**
      * @param bool $is_enabled
@@ -22,7 +22,7 @@ abstract class AbstractHandler extends AbstractLogger
     {
         $this->is_enabled = $params['is_enabled'] ?? false;
         $this->levels = $params['levels'] ?? LogLevel::cases();
-        $this->formatter = $params['formatter'] ?? null;
+        $this->formatter = $params['formatter'] ?? new LineFormatter();
     }
 
     /**
@@ -49,4 +49,13 @@ abstract class AbstractHandler extends AbstractLogger
         return $this->levels;
     }
 
+    public function log(LogLevel $logLevel, string $message)
+    {
+        if ($this->isIsEnabled() and in_array($logLevel, $this->getLevels())) {
+            $logMessage = $this->formatter->formatted(new \DateTime(), $logLevel, $message);
+            $this->write($logLevel, $logMessage);
+        }
+    }
+
+    abstract public function write(LogLevel $logLevel, string $message);
 }
