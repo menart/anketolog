@@ -1,0 +1,19 @@
+{
+  "name": "menart/anketolog",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "menart",
+      "email": "aleksandr@artamonov.in"
+    }
+  ],
+  "require": {
+  },
+  "autoload": {
+    "psr-4": {
+      "Logger\\": "src/"
+    }
+  }
+}
